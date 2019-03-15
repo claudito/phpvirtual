@@ -1,0 +1,61 @@
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+
+<script>
+
+$(document).ready(function() {
+    $('#example').DataTable( {
+
+        "language":{
+        
+         "url":"https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+
+        },
+        "ajax": "source.php",
+        "columns": [
+
+            { "data": "id" },
+            { "data": "nombres" },
+            { "data": "apellidos" },
+            { "data": "dni" },
+            { "data": null,render:function(data){
+
+            acciones  = '<button>Editar</button>';
+
+            acciones += '<button>Eliminar</button>';
+
+            return acciones;
+
+
+
+            }}
+        
+        
+
+        ]
+    } );
+} );
+
+</script>
+
+<table id="example" class="table" style="width:100%">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Dni</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+     
+</table>
