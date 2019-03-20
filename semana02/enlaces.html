@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Enlaces</title>
+</head>
+<body>
+	
+<a href="http://google.com">Click para ir al google</a>
+
+<br>
+
+<a href="http://google.com" target="blank">Click para ir al google en otra pestaña</a>
+
+<hr>
+
+<!-- Elementos Data -->
+<!-- 
+
+data-nombres="Luis Claudio"
+
+
+ -->
+
+
+<a class="datos" data-nombres="Luis Augusto" 
+data-apellidos="Claudio Ponce">Mis Datos</a>
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script>
+$(document).on('click','.datos',function(){
+
+ nombres   = $(this).data('nombres');
+ apellidos = $(this).data('apellidos');
+
+ 
+ alert('Mis Nombres son: '+nombres+'\n'+'Mi Apellidos son: '+apellidos);
+
+
+
+});
+
+
+</script>
+
+</body>
+</html>

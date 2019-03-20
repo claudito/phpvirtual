@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<!-- uft-8 ó ñ ü -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>Template</title>
+</head>
+<body>
+
+<!-- Formulario -->
+<form  id="agregar" autocomplete="off">
+	
+<label>Nombres</label>
+<input type="text" name="nombres" placeholder="Ingrese sus nombres" 
+minlength="8" maxlength="10" required>
+
+<br>
+
+<label>Edad</label>
+<input type="number" name="edad" min="0" max="60">
+<br>
+
+<label>Peso</label>
+<input type="number" name="peso"  step="any">
+
+<br>
+
+<label>Fecha de Ingreso</label>
+<input type="date" name="fecha_ingreso" 
+ value="2019-03-19" min="2019-03-19" max="2019-03-19"  readonly>
+
+ <br>
+
+<label>Hora de Ingreso</label>
+<input type="time" name="hora_ingreso" value="20:16">
+
+<hr>
+
+<br>
+<label>Sexo</label>
+<input type="radio" name="sexo" value="M" checked>M
+<input type="radio" name="sexo" value="F" >F
+
+<br>
+<label>Lenguajes de Programación</label>
+<input type="checkbox" name="lenguaje[]" value="PHP" checked>PHP
+<input type="checkbox" name="lenguaje[]" value="JAVA" >JAVA
+<input type="checkbox" name="lenguaje[]" value="COBOL" checked>COBOL
+
+<br>
+
+<label>Base de Datos</label>
+<select name="base_datos" required>
+<option value="">Seleccionar</option>
+<option value="1">MySQL</option>
+<option value="2" >Oracle</option>
+<option value="3" selected>PostgreSQL</option>
+</select>
+
+<br>
+<label>Comentario</label>
+<textarea name="comentario"  cols="30" rows="3" placeholder="Ingrese el contenido"></textarea>
+
+
+<br><br>
+<button>Grabar</button>
+</form>
+
+
+
+	
+
+
+</body>
+</html>
