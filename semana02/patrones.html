@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Patrones</title>
+</head>
+<body>
+	
+<form id="agregar" autocomplete="off">
+	
+
+<label>Nombres</label>
+<input type="text" name="nombres" 
+pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" required="">
+
+<br>
+
+<label>Apellidos</label>
+<input type="text" name="apellidos" 
+pattern="[a-zA-Z-' ']+" required="">
+
+<button>Agregar</button>
+
+
+</form>
+
+
+<div id="mensaje"></div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script>
+	
+//GET , POST
+
+$(document).on('submit','#agregar',function(e){
+
+parametros = $(this).serialize();
+
+$.ajax({
+
+url:"source.php",
+type:"POST",
+data:parametros,
+beforeSend:function(){
+
+$('#mensaje').html('Cargando...');
+
+},
+success:function(data){
+
+$('#mensaje').html(data);
+
+}
+
+
+});
+
+
+e.preventDefault();
+});
+
+</script>
+
+
+</body>
+</html>
