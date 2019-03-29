@@ -105,7 +105,22 @@
         </button>
       </div>
       <div class="modal-body">
-        ...
+      
+     
+<div class="form-group">
+<label>Cargo</label>
+<select name="cargo"  class="cargo form-control" required></select>
+</div>
+
+
+<div class="form-group">
+<label>Sede</label>
+<select name="sede" class="sede form-control" required></select>
+</div>
+
+
+
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -160,6 +175,46 @@ $('#consulta').DataTable({
 
 //Cargar Modal Agregar
 $(document).on('click','.btn-agregar',function(){
+
+//Lista de Cargos
+cargo  = '<option value="">[Seleccionar]</option>';
+
+url    = 'source.php?op=4';
+
+$.getJSON(url,{},function(data){
+
+data.forEach(function (row){
+
+cargo += '<option value="'+row.id+'">'+row.nombre+'</option>';
+
+$('.cargo').html(cargo);
+
+
+});
+
+
+});
+
+//Sede
+
+sede = '<option value="">[Seleccionar]</option>';
+
+url  = 'source.php?op=3';
+
+$.getJSON(url,{},function(data){
+
+
+data.forEach(function (row){
+
+
+sede += '<option value="'+row.id+'">'+row.nombre+'</option>';
+
+$('.sede').html(sede);
+
+});
+
+});
+
 
 
 $('.modal-title').html('Agregar');
