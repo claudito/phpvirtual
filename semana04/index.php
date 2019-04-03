@@ -14,6 +14,11 @@
 <!-- Css FontAwesome -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<!-- Sweet Alert -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+
+
 
 	<title>Empleados</title>
 </head>
@@ -77,6 +82,33 @@
         </button>
       </div>
       <div class="modal-body">
+
+
+<div class="form-group">
+<label>Nombres</label>
+<input type="text" name="nombres" class="nombres form-control" required>
+</div>
+
+<div class="form-group">
+<label>Apellidos</label>
+<input type="text" name="apellidos" class="apellidos form-control" required>
+</div>
+
+<div class="form-group">
+<label>Fecha de Nacimiento</label>
+<input type="date" name="fecha_nacimiento" class="fecha_nacimiento form-control" required>
+</div>
+
+<div class="form-group">
+<label>Fecha de Ingreso</label>
+<input type="date" name="fecha_ingreso" class="fecha_ingreso form-control" required>
+</div>
+
+<div class="form-group">
+<label>Salario</label>
+<input type="number" step="any"  name="salario" class="salario form-control" required>
+</div>
+
       
      
 <div class="form-group">
@@ -130,6 +162,7 @@ $(document).ready(function (){
 
 $('#consulta').DataTable({
 
+"bAutoWidth": false,
 "deferRender":true,
 "iDisplayLength": 25,
  "bProcessing": true,
