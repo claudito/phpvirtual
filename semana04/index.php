@@ -19,7 +19,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
 
 
-
 	<title>Empleados</title>
 </head>
 <body>
@@ -83,6 +82,7 @@
       </div>
       <div class="modal-body">
 
+<input type="hidden" name="accion" class="accion">
 
 <div class="form-group">
 <label>Nombres</label>
@@ -129,7 +129,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 
-        <button type="button" class="btn btn-primary btn-submit">Save changes</button>
+        <button type="submit" class="btn btn-primary btn-submit">Save changes</button>
 
       </div>
     </div>
@@ -157,11 +157,14 @@
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
 <script>
+
+function loadData(){
 	
 $(document).ready(function (){
 
 $('#consulta').DataTable({
 
+"destroy":true,
 "bAutoWidth": false,
 "deferRender":true,
 "iDisplayLength": 25,
@@ -189,8 +192,19 @@ $('#consulta').DataTable({
 });
 
 
+}
+
+
+//Cargar Función loadData()
+loadData();
+
+
 //Cargar Modal Agregar
 $(document).on('click','.btn-agregar',function(){
+
+
+$('.accion').val('agregar');
+
 
 //Lista de Cargos
 cargo  = '<option value="">[Seleccionar]</option>';
@@ -244,6 +258,7 @@ $('#modal-registro').modal('show');
 //Cargar Modal Actualizar
 $(document).on('click','.btn-edit',function(){
 
+$('.accion').val('actualizar');
 
 $('.modal-title').html('Actualizar');
 $('.btn-submit').html('Actualizar');
@@ -251,6 +266,66 @@ $('#modal-registro').modal('show');
 
 
 });
+
+
+//Agregar o Actualizar
+$(document).on('submit','#registro',function(e){
+
+parametros  = $(this).serialize();
+
+$.ajax({
+
+url:"source.php?op=2",
+type:"POST",
+data:parametros,
+beforeSend:function()
+{
+
+swal({
+
+title:"Cargando..",
+text:"Espere un momento",
+imageUrl:"img/loader2.gif"
+
+});
+
+
+},
+success:function()
+{
+
+swal({
+
+title:"Buen Trabajo",
+text:"Registro Agregado",
+type:"success",
+timer:3000,
+showConfirmButton:false
+});
+
+
+//Cargar loadData
+loadData();
+
+$('#modal-registro').modal('hide');
+
+
+
+
+}
+
+
+
+
+
+
+});
+
+
+
+e.preventDefault();
+});
+
 
 
 

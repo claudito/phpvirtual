@@ -51,7 +51,59 @@ echo "Error: ".$e->getMessage();
 
 		break;
 	case 2:
-		# code...
+
+	$accion            =  trim($_REQUEST['accion']);
+	$nombres           =  trim($_REQUEST['nombres']);
+	$apellidos         =  trim($_REQUEST['apellidos']);
+	$fecha_nacimiento  =  trim($_REQUEST['fecha_nacimiento']);
+	$fecha_ingreso     =  trim($_REQUEST['fecha_ingreso']);
+	$salario           =  trim($_REQUEST['salario']);
+	$cargo             =  trim($_REQUEST['cargo']);
+	$sede              =  trim($_REQUEST['sede']);
+
+
+	if($accion=='agregar')
+	{
+		//Agregar
+
+try {
+
+$query =  "INSERT INTO empleado
+(nombres,apellidos,id_cargo,id_sede,fecha_nacimiento,fecha_ingreso,salario)
+VALUES
+(:nombres,:apellidos,:id_cargo,:id_sede,:fecha_nacimiento,:fecha_ingreso,:salario)";
+$statement = $conexion->prepare($query);
+$statement->bindParam(':nombres',$nombres);
+$statement->bindParam(':apellidos',$apellidos);
+$statement->bindParam(':id_cargo',$cargo);
+$statement->bindParam(':id_sede',$sede);
+$statement->bindParam(':fecha_nacimiento',$fecha_nacimiento);
+$statement->bindParam(':fecha_ingreso',$fecha_ingreso);
+$statement->bindParam(':salario',$salario);
+$statement->execute();
+echo "ok";
+
+
+} catch (Exception $e) {
+
+echo "Error: ".$e->getMessage();
+
+}
+
+
+
+
+	}
+	else
+	{
+
+		//Actualizar
+
+
+	}
+
+
+
 		break;
 
 	case 3:
