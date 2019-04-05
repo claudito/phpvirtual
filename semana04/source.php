@@ -13,7 +13,8 @@ $opcion   = $_REQUEST['op'];
 2 =  agregar y actualizar empleados
 3 =  lista de sedes
 4 =  lista de cargos
-5 =  eliminar / inactivar empleados 
+5 =  eliminar / inactivar empleados
+6 =  Consulta de empleado por id
 
 */
 
@@ -81,7 +82,20 @@ $statement->bindParam(':fecha_nacimiento',$fecha_nacimiento);
 $statement->bindParam(':fecha_ingreso',$fecha_ingreso);
 $statement->bindParam(':salario',$salario);
 $statement->execute();
-echo "ok";
+
+echo json_encode(
+
+array(
+
+'title'=>'Buen Trabajo',
+'text' =>'Registro Agregado',
+'type' => 'success'
+
+)
+
+);
+
+
 
 
 } catch (Exception $e) {
@@ -97,7 +111,53 @@ echo "Error: ".$e->getMessage();
 	else
 	{
 
+	$id = trim($_REQUEST['id']);
+
 		//Actualizar
+
+try {
+
+$query =  "UPDATE empleado SET 
+nombres  =:nombres,
+apellidos=:apellidos,
+id_cargo=:id_cargo,
+id_sede=:id_sede,
+fecha_nacimiento=:fecha_nacimiento,
+fecha_ingreso=:fecha_ingreso,
+salario=:salario 
+WHERE id=:id";
+$statement = $conexion->prepare($query);
+$statement->bindParam(':nombres',$nombres);
+$statement->bindParam(':apellidos',$apellidos);
+$statement->bindParam(':id_cargo',$cargo);
+$statement->bindParam(':id_sede',$sede);
+$statement->bindParam(':fecha_nacimiento',$fecha_nacimiento);
+$statement->bindParam(':fecha_ingreso',$fecha_ingreso);
+$statement->bindParam(':salario',$salario);
+$statement->bindParam(':id',$id);
+$statement->execute();
+
+echo json_encode(
+
+array(
+
+'title'=>'Buen Trabajo',
+'text' =>'Registro Actualizado',
+'type' => 'success'
+
+)
+
+);
+
+
+
+
+
+} catch (Exception $e) {
+
+echo "Error: ".$e->getMessage();
+
+}
 
 
 	}
@@ -150,8 +210,67 @@ echo "Error: ".$e->getMessage();
 		break;
 
 	case 5:
-		# code...
-		break;
+
+	$id  = trim($_REQUEST['id']);
+
+	try {
+
+
+	$query =  "DELETE FROM empleado WHERE id=:id";
+	$statement = $conexion->prepare($query);
+	$statement->bindParam(':id',$id);
+	$statement->execute();
+
+
+	echo json_encode(
+
+	array(
+
+	'title'=>'Buen Trabajo',
+	'text' =>'Registro Eliminado',
+	'type' => 'success'
+
+	)
+
+	);
+
+
+
+		
+	} catch (Exception $e) {
+		
+
+     echo "Error: ".$e->getMessage();
+
+	}
+
+
+
+	break;
+
+	case 6:
+
+	$id  =  trim($_REQUEST['id']);
+
+	try {
+
+	$query =  "SELECT * FROM empleado WHERE id=:id";
+	$statement = $conexion->prepare($query);
+	$statement->bindParam(':id',$id);
+	$statement->execute();
+
+	$result  = $statement->fetch(PDO::FETCH_ASSOC);
+
+    echo json_encode($result);
+		
+	} catch (Exception $e) {
+		
+     echo "Error: ".$e->getMessage();
+
+	}
+
+
+	break;
 
 	
 	default:

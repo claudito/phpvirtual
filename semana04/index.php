@@ -46,6 +46,7 @@
 <th>Id</th>
 <th>Nombres</th>
 <th>Apellidos</th>
+<th>Acciones</th>
 </tr>	
 
 </thead>
@@ -83,6 +84,8 @@
       <div class="modal-body">
 
 <input type="hidden" name="accion" class="accion">
+
+<input type="hidden" name="id" class="id">
 
 <div class="form-group">
 <label>Nombres</label>
@@ -174,7 +177,18 @@ $('#consulta').DataTable({
 
 { mData:"id"},
 { mData:"nombres"},
-{ mData:"apellidos"}
+{ mData:"apellidos"},
+{ mData: null,render:function(data){
+
+acciones  ='<button  data-id="'+data.id+'"  class="btn btn-primary btn-edit"><i class="fa fa-edit"></i></button> ';
+
+acciones  +='<button data-id="'+data.id+'" class="btn btn-danger btn-delete" ><i class="fa fa-trash"></i></button>';
+
+
+ return  acciones;
+
+
+}}
 
 
 ],
@@ -202,9 +216,10 @@ loadData();
 //Cargar Modal Agregar
 $(document).on('click','.btn-agregar',function(){
 
+//Resetear inputs formulario
+$('#registro')[0].reset();
 
 $('.accion').val('agregar');
-
 
 //Lista de Cargos
 cargo  = '<option value="">[Seleccionar]</option>';
@@ -258,8 +273,64 @@ $('#modal-registro').modal('show');
 //Cargar Modal Actualizar
 $(document).on('click','.btn-edit',function(){
 
-$('.accion').val('actualizar');
+id = $(this).data('id');
 
+$('.id').val(id);
+
+//Cargar Datos del Usuario
+$.getJSON('source.php?op=6',{'id':id},function (data){
+
+$('.nombres').val(data.nombres);
+$('.apellidos').val(data.apellidos);
+$('.fecha_nacimiento').val(data.fecha_nacimiento);
+$('.fecha_ingreso').val(data.fecha_ingreso);
+$('.salario').val(data.salario);
+
+});
+
+//Lista de Cargos
+cargo  = '';
+
+url    = 'source.php?op=4';
+
+$.getJSON(url,{},function(data){
+
+data.forEach(function (row){
+
+cargo += '<option value="'+row.id+'">'+row.nombre+'</option>';
+
+$('.cargo').html(cargo);
+
+
+});
+
+
+});
+
+
+//Sede
+
+sede = '';
+
+url  = 'source.php?op=3';
+
+$.getJSON(url,{},function(data){
+
+
+data.forEach(function (row){
+
+
+sede += '<option value="'+row.id+'">'+row.nombre+'</option>';
+
+$('.sede').html(sede);
+
+});
+
+});
+
+
+
+$('.accion').val('actualizar');
 $('.modal-title').html('Actualizar');
 $('.btn-submit').html('Actualizar');
 $('#modal-registro').modal('show');
@@ -278,6 +349,7 @@ $.ajax({
 url:"source.php?op=2",
 type:"POST",
 data:parametros,
+dataType:'JSON',
 beforeSend:function()
 {
 
@@ -285,20 +357,21 @@ swal({
 
 title:"Cargando..",
 text:"Espere un momento",
-imageUrl:"img/loader2.gif"
+imageUrl:"img/loader2.gif",
+showConfirmButton:false
 
 });
 
 
 },
-success:function()
+success:function(data)
 {
 
 swal({
 
-title:"Buen Trabajo",
-text:"Registro Agregado",
-type:"success",
+title:data.title,
+text:data.text,
+type:data.type,
 timer:3000,
 showConfirmButton:false
 });
@@ -315,17 +388,54 @@ $('#modal-registro').modal('hide');
 }
 
 
-
-
-
-
 });
-
-
 
 e.preventDefault();
 });
 
+
+//Botón Eliminar
+$(document).on('click','.btn-delete',function(){
+
+id = $(this).data('id');
+
+
+swal({
+  title: "¿Estás Seguro?",
+  text: "El Registro Seleccionado se eliminará permanentemente",
+  type: "warning",
+  showCancelButton: true,
+  confirmButtonClass: "btn-danger",
+  confirmButtonText: "Si, estoy seguro",
+  cancelButtonText:"Cancelar",
+  closeOnConfirm: false
+},
+function(){
+
+$.getJSON('source.php?op=5',{'id':id},function(data){
+
+swal({
+
+title:data.title,
+text:data.text,
+type:data.type,
+timer:3000,
+showConfirmButton:false
+
+});
+
+//Cargar loadData
+loadData();
+
+
+});
+
+
+});
+
+
+
+});
 
 
 
