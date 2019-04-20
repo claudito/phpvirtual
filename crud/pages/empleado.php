@@ -1,3 +1,10 @@
+<?php 
+
+include'../config.php';
+include'../acceso.php';
+
+ ?>
+ 
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -18,6 +25,25 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
 
+<!-- JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!-- JS Datatable -->
+
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
+<!-- DataTables Export -->
+<script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+
+<script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
 
 	<title>Empleados</title>
 </head>
@@ -26,6 +52,13 @@
 <!-- Contenedor -->
 <div class="container-fluid">
 
+<div class="row">
+<div class="col-md-12">
+<?php include'../templates/nav.php'; ?>
+</div>
+</div>
+
+
 <!-- Fila  1 -->
 <div class="row">
 
@@ -33,13 +66,13 @@
 <div class="col-md-12">
 
 
-<button class="btn btn-primary btn-agregar" ><i class="fa fa-plus"></i> Agregar</button>
+<button class="btn btn-primary btn-agregar btn-sm" ><i class="fa fa-plus"></i> Agregar</button>
 
 <hr>
 	
 <div class="table-responsive">
 
-<table id="consulta" class="table">
+<table id="consulta" class="table" style="font-size: 12px">
 	
 <thead>
 <tr>
@@ -154,16 +187,7 @@
 
 
 
-<!-- JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-<!-- JS Datatable -->
-
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-
-<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
 <script>
 
@@ -173,6 +197,32 @@ $(document).ready(function (){
 
 $('#consulta').DataTable({
 
+dom:'lBfrtip',
+buttons:[
+
+{
+
+extend:'excelHtml5',
+title:'Empleados',
+sheetName:'Empleados'
+
+},
+{
+
+extend:'pdfHtml5',
+title:'Empleados',
+orientation:'landscape',
+pageSize:'LEGAL'
+
+},
+{
+extend: 'print',
+text: 'Imprimir',
+autoPrint: true
+
+}
+
+],
 "destroy":true,
 "bAutoWidth": false,
 "deferRender":true,
@@ -192,9 +242,9 @@ $('#consulta').DataTable({
 { mData:"dateCreate"},
 { mData: null,render:function(data){
 
-acciones  ='<button  data-id="'+data.id+'"  class="btn btn-primary btn-edit"><i class="fa fa-edit"></i></button> ';
+acciones  ='<button  data-id="'+data.id+'"  class="btn btn-primary btn-edit btn-sm"><i class="fa fa-edit"></i></button> ';
 
-acciones  +='<button data-id="'+data.id+'" class="btn btn-danger btn-delete" ><i class="fa fa-trash"></i></button>';
+acciones  +='<button data-id="'+data.id+'" class="btn btn-danger btn-delete btn-sm" ><i class="fa fa-trash"></i></button>';
 
 
  return  acciones;
