@@ -1,0 +1,40 @@
+Comandos de Instalación:
+
+1. Ingresar el usuario (Presionar Enter):
+git config --global user.name "claudito"
+
+2. Ingresar el correo eletronico(Presionar Enter)
+git config --global user.mail "1107000044@upci.edu.pe"
+
+
+3. Crear la llave SSH
+
+ ssh-keygen (Presionar Enter)
+
+ Luego seguir presionando Enter hasta que nos aparezca la Llave SSH generada.
+
+
+ 4. Obtener la llave SSH Generada
+
+   cat ~/.ssh/id_rsa.pub
+
+   cat /root/.ssh/id_rsa.pub
+
+Una vez que se genere la llave(texto), copiar el texto.
+
+
+5. Registrar nuestra llave en nuestra cuenta de github.com: 
+
+     github.com/settings/ssh
+
+ 
+ 
+
+
+
+
+
+
+
+
+

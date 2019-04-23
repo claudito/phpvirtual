@@ -1,0 +1,56 @@
+GIT : Lenguaje para aplicar un sistema de control de versiones.
+
+github.com: Un repositorio web para crear nuestros proyectos y/o subir nuestros proyectos, utilizando GIT
+
+- Pasos para Subir nuestro proyecto/código a un repositorio en 
+github.com:
+
+1. Tener un repositorio creado en github.com
+2. Inicializar el sistema de control de versiones(GIT):
+   
+    - git init
+
+3 Agregar la información(archivos y/o carpetas):
+
+    - git add github/notas.txt
+    - git add .
+
+4. Crear un Commit(Crear un cambio nuevo/Subir un cambio):
+
+   - git commit -m "Primer Cambio"
+
+
+5. Agregar el repositorio creado en github.com
+
+  -  git remote add origin https://github.com/claudito/crud2019.git
+
+6. Subir nuestros archivos al Repositorio
+  
+  - git push -u origin master
+
+####################################################################
+
+- Pasos para subir nuevos cambios
+
+1. Agregar los cambios
+
+   - git add .
+
+2. Crear el Cambio 
+
+  - git commit -m "Segunda versión"
+
+3. Consultar el cambio agregado (opcional)
+
+  - git status
+
+4. Resetear Cambios
+  
+  -  git reset
+
+  -  Paso 1 y Paso2
+
+5. Subir lo cambios a Repostorio
+   
+   - git push -u origin master
+
