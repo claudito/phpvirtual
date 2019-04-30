@@ -13,6 +13,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="<?= URL ?>pages/empleado.php">Empleado</a>
+          <a class="dropdown-item" href="<?= URL ?>pages/cliente.php">Cliente</a>
           <a class="dropdown-item" href="#">Sede</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Cargo</a>

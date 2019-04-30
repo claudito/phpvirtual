@@ -424,7 +424,7 @@ swal({
 
 title:"Cargando..",
 text:"Espere un momento",
-imageUrl:"img/loader2.gif",
+imageUrl:".../img/loader2.gif",
 showConfirmButton:false
 
 });
