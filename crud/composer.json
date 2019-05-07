@@ -1,5 +1,6 @@
 {
     "require": {
-        "jossmp/sunatphp": "^2.0"
+        "jossmp/sunatphp": "^2.0",
+        "jossmp/datos-peru": "^2.0"
     }
 }

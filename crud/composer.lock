@@ -4,8 +4,63 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0d7a3941442c4d9441c8838e8bce3129",
+    "content-hash": "a3c48202fa3ce32d97f96c4a6f6b23cf",
     "packages": [
+        {
+            "name": "jossmp/datos-peru",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/JossMP/datos-peru.git",
+                "reference": "168600837e071d3e9a9d93bf7879e9187b8d908e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JossMP/datos-peru/zipball/168600837e071d3e9a9d93bf7879e9187b8d908e",
+                "reference": "168600837e071d3e9a9d93bf7879e9187b8d908e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "lib-curl": "*"
+            },
+            "require-dev": {
+                "php": ">=5.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Reniec\\": "src/reniec/",
+                    "MinTra\\": "src/mintra/",
+                    "EsSalud\\": "src/essalud/",
+                    "CURL\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Josue Mazco Puma",
+                    "email": "jossmp@gmail.com",
+                    "homepage": "https://geekdev.ml/",
+                    "role": "Developers"
+                }
+            ],
+            "description": "Clase para realizar consultas a reniec, essalud, ministrio del trabajo con el numero de DNI",
+            "homepage": "https://github.com/JossMP/datos-peru",
+            "keywords": [
+                "EsSalud",
+                "Mintra",
+                "consulta",
+                "curl",
+                "peru",
+                "php",
+                "reniec"
+            ],
+            "time": "2018-09-24T12:11:23+00:00"
+        },
         {
             "name": "jossmp/sunatphp",
             "version": "v2.0.1",

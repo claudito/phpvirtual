@@ -9,4 +9,8 @@ return array(
     'response\\' => array($vendorDir . '/jossmp/sunatphp/src'),
     'cURL\\' => array($vendorDir . '/jossmp/sunatphp/src'),
     'Sunat\\' => array($vendorDir . '/jossmp/sunatphp/src'),
+    'Reniec\\' => array($vendorDir . '/jossmp/datos-peru/src/reniec'),
+    'MinTra\\' => array($vendorDir . '/jossmp/datos-peru/src/mintra'),
+    'EsSalud\\' => array($vendorDir . '/jossmp/datos-peru/src/essalud'),
+    'CURL\\' => array($vendorDir . '/jossmp/datos-peru/src'),
 );

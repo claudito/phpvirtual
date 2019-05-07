@@ -66,6 +66,26 @@ include'../acceso.php';
 	
 <button class="btn btn-primary btn-agregar"><i class="fa fa-plus"></i> Agregar</button>
 
+<hr>
+
+<div class="table-responsive">
+  <table id="consulta" class="table" style="font-size: 12px">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Razón Social</th>
+        <th>Ruc</th>
+        <th>DNI</th>
+        <th>Estado</th>
+        <th>Condición</th>
+        <th>Oficio</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+  </table>
+</div>
+
+
 
 </div>
 
@@ -94,7 +114,8 @@ include'../acceso.php';
 
 <div class="input-group mb-3">
 
-<input type="number" class="numero form-control">
+<input type="number" class="numero form-control" required 
+>
 
 <div class="input-group-append">
 
@@ -113,20 +134,30 @@ include'../acceso.php';
 
 <div class="form-group">
 <label>Ruc</label>
-<input type="text" name="ruc" class="ruc form-control">
+<input type="text" name="ruc" class="ruc form-control" required>
 </div>
 
 
 <div class="form-group">
 <label>Estado</label>
-<input type="text" name="estado" class="estado form-control">
+<input type="text" name="estado" class="estado form-control" required>
+</div>
+
+<div class="form-group">
+<label>Condición</label>
+<input type="text" name="condicion" class="condicion form-control" required>
+</div>
+
+<div class="form-group">
+<label>Oficio</label>
+<input type="text" name="oficio" class="oficio form-control" required>
 </div>
 
 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary btn-submit">Save changes</button>
+        <button type="submit" class="btn btn-primary btn-submit">Save changes</button>
       </div>
     </div>
   </div>
@@ -135,11 +166,96 @@ include'../acceso.php';
 </form>
 
 <script>
+
+function loadData(){
+  
+$(document).ready(function (){
+
+$('#consulta').DataTable({
+
+dom:'lBfrtip',
+buttons:[
+
+{
+
+extend:'excelHtml5',
+title:'Empleados',
+sheetName:'Empleados'
+
+},
+{
+
+extend:'pdfHtml5',
+title:'Empleados',
+orientation:'landscape',
+pageSize:'LEGAL'
+
+},
+{
+extend: 'print',
+text: 'Imprimir',
+autoPrint: true
+
+}
+
+],
+"destroy":true,
+"bAutoWidth": false,
+"deferRender":true,
+"iDisplayLength": 25,
+ "bProcessing": true,
+"sAjaxSource": "../source/cliente.php?op=3",
+"aoColumns":[
+
+{ mData:"id"},
+{ mData:"razon_social"},
+{ mData:"ruc"},
+{ mData:"dni"},
+{ mData:"estado"},
+{ mData:"condicion"},
+{ mData:"oficio"},
+{ mData: null,render:function(data){
+
+acciones  ='<button  data-id="'+data.id+'"  class="btn btn-primary btn-edit btn-sm"><i class="fa fa-edit"></i></button> ';
+
+acciones  +='<button data-id="'+data.id+'" class="btn btn-danger btn-delete btn-sm" ><i class="fa fa-trash"></i></button>';
+
+
+ return  acciones;
+
+
+}}
+
+
+],
+"language":{
+
+"url":"https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+
+
+}
+
+
+});
+
+
+});
+
+
+}
+
+
+//Cargar Función loadData()
+loadData();
+
+
+
+
 	
 //Cargar Modal Agregar
 $(document).on('click','.btn-agregar',function(){
 
-
+$("#agregar")[0].reset();
 $('.btn-submit').html('Crear');
 $('.modal-title').html('Crear Cliente');
 $('#modal-agregar').modal('show');
@@ -156,7 +272,15 @@ numero = $('.numero').val();
 if(numero=='')
 {
 
-alert('vacio');
+swal({
+
+title:"Campo Vacío",
+text:"Ingrese un valor para realizar consulta",
+type:"info",
+showConfirmButton:false,
+timer:3000
+
+});
 
 return false;
 
@@ -186,10 +310,13 @@ showConfirmButton:false,
 },
 success:function(data){
 
+if(data.success==true)
+{
+
 swal({
 
 title:"Buen Trabajo",
-text:"Data Cargada",
+text:"Registro Encontrado",
 type:"success",
 showConfirmButton:false,
 timer:1000
@@ -199,8 +326,26 @@ timer:1000
 $('.razon_social').val(data.result.razon_social);
 $('.ruc').val(data.result.ruc);
 $('.estado').val(data.result.estado);
+$('.condicion').val(data.result.condicion);
+$('.oficio').val(data.result.oficio);
 
+}
+else
+{
 
+swal({
+
+title:"Error",
+text:data.message,
+type:"error",
+showConfirmButton:false,
+timer:4000
+
+});
+
+$('.razon_social').val('');
+$('.ruc').val('');
+$('.estado').val('');
 
 
 }
@@ -208,14 +353,69 @@ $('.estado').val(data.result.estado);
 
 
 
+}
+
+
+});
+
+
+});
+
+
+//Agregar Cliente
+$(document).on('submit','#agregar',function(e){
+
+parametros = $(this).serialize();
+
+$.ajax({
+
+ url:"../source/cliente.php?op=2",
+ type:"POST",
+ data:parametros,
+ dataType:"JSON",
+ beforeSend:function()
+ {
+
+swal({
+
+title:"Cargando..",
+text:"Espere un momento",
+imageUrl:"../img/loader2.gif",
+showConfirmButton:false,
+//timer:2000
+
+});
+
+
+ }
+ ,
+ success:function(data)
+ {
+
+swal({
+
+title:data.title,
+text:data.text,
+type:data.type,
+showConfirmButton:false,
+timer:3000
+
+});
+
+$("#agregar")[0].reset();
+$('#modal-agregar').modal('hide');
+loadData();
+
+
+ }
+
+
 
 });
 
 
 
-
-
-
+e.preventDefault();
 });
 
 

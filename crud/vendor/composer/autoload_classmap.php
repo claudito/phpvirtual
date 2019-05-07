@@ -6,6 +6,10 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'CURL\\cURL' => $vendorDir . '/jossmp/datos-peru/src/curl.php',
+    'EsSalud\\EsSalud' => $vendorDir . '/jossmp/datos-peru/src/essalud/essalud.php',
+    'MinTra\\mintra' => $vendorDir . '/jossmp/datos-peru/src/mintra/mintra.php',
+    'Reniec\\Reniec' => $vendorDir . '/jossmp/datos-peru/src/reniec/reniec.php',
     'Sunat\\Sunat' => $vendorDir . '/jossmp/sunatphp/src/sunat.php',
     'cURL\\cURL' => $vendorDir . '/jossmp/sunatphp/src/curl.php',
     'response\\obj' => $vendorDir . '/jossmp/sunatphp/src/obj.php',

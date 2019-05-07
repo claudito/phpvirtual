@@ -19,6 +19,22 @@ class ComposerStaticInitba229a1ab0dadca525b4747738c561b2
         array (
             'Sunat\\' => 6,
         ),
+        'R' => 
+        array (
+            'Reniec\\' => 7,
+        ),
+        'M' => 
+        array (
+            'MinTra\\' => 7,
+        ),
+        'E' => 
+        array (
+            'EsSalud\\' => 8,
+        ),
+        'C' => 
+        array (
+            'CURL\\' => 5,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -34,9 +50,29 @@ class ComposerStaticInitba229a1ab0dadca525b4747738c561b2
         array (
             0 => __DIR__ . '/..' . '/jossmp/sunatphp/src',
         ),
+        'Reniec\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jossmp/datos-peru/src/reniec',
+        ),
+        'MinTra\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jossmp/datos-peru/src/mintra',
+        ),
+        'EsSalud\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jossmp/datos-peru/src/essalud',
+        ),
+        'CURL\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jossmp/datos-peru/src',
+        ),
     );
 
     public static $classMap = array (
+        'CURL\\cURL' => __DIR__ . '/..' . '/jossmp/datos-peru/src/curl.php',
+        'EsSalud\\EsSalud' => __DIR__ . '/..' . '/jossmp/datos-peru/src/essalud/essalud.php',
+        'MinTra\\mintra' => __DIR__ . '/..' . '/jossmp/datos-peru/src/mintra/mintra.php',
+        'Reniec\\Reniec' => __DIR__ . '/..' . '/jossmp/datos-peru/src/reniec/reniec.php',
         'Sunat\\Sunat' => __DIR__ . '/..' . '/jossmp/sunatphp/src/sunat.php',
         'cURL\\cURL' => __DIR__ . '/..' . '/jossmp/sunatphp/src/curl.php',
         'response\\obj' => __DIR__ . '/..' . '/jossmp/sunatphp/src/obj.php',

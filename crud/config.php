@@ -7,7 +7,7 @@ define('PASS', '');
 define('BD','datatable');
 
 #URL
-define('URL', 'http://localhost/datatable/crud/');
+define('URL', 'http://localhost/cursos/datatable/crud/');
 
 #Sesion
 define('KEY','KEY-CRUD');

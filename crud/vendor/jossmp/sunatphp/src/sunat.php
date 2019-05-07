@@ -73,6 +73,17 @@
 							"razon_social"=>trim($RS)
 						);
 					}
+					else
+					{
+
+                    $rtn = array(
+							"ruc"=>"",
+							"razon_social"=>""
+						);
+                     
+
+					}
+
 
 					//Telefono
 					$patron='/<td class="bgn" colspan=1>Tel&eacute;fono\(s\):<\/td>[ ]*-->\r\n<!--\t[ ]*<td class="bg" colspan=1>(.*)<\/td>/';
